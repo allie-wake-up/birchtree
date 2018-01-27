@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "outDir": "./build",
+        "alwaysStrict": true,
+        "allowJs": false,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "target": "es6",
+        "noUnusedLocals": true,
+        "declaration": true,
+        "typeRoots": [
+          "node_modules/@types"
+        ]
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}

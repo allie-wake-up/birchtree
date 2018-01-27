@@ -1,0 +1,48 @@
+{
+  "name": "birch",
+  "version": "0.1.0",
+  "description": "Query helpers built on knex",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "test": "jest",
+    "test-coverage": "jest --coverage",
+    "test-watch": "jest --watch",
+    "build": "tsc --project tsconfig.json",
+    "watch": "tsc --project tsconfig.json --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheKiteEatingTree/birch.git"
+  },
+  "author": "Andrew Stephan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheKiteEatingTree/birch/issues"
+  },
+  "homepage": "https://github.com/TheKiteEatingTree/birch#readme",
+  "devDependencies": {
+    "@types/jest": "^22.1.0",
+    "@types/knex": "^0.14.4",
+    "jest": "^22.1.4",
+    "ts-jest": "^22.0.1",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "treeize": "^2.1.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}
