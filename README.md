@@ -15,6 +15,7 @@ BirchTree is also a repository library built on knexjs.  It provides base `Repo`
   * [nest](#nest)
 - [Repository System](#repository-system)
   * [Basic Setup](#basic-setup)
+  * [Important](#important-1)
   * [Create](#create)
   * [Update](#update)
   * [Save](#save)
@@ -180,6 +181,16 @@ class UserRepo extends Repo<User> {
     }
 }
 ```
+
+### Important
+
+- Models
+    - The models must have static tableName property equal to the name of the corresponding database table
+    - models must have a toJSON function.  This function is used to get the object to persist in repo.create, repo.update and repo.save
+    - models must have an id property
+- Repos
+    - Must pass the model class and birch to super in the constructor
+    - can access birch with this.birch in extended repos
 
 ### Create
 
