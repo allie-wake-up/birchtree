@@ -43,7 +43,7 @@ describe('grow', () => {
             name: true,
             email: true
         }));
-        const results = await grow('users');
+        const results = await grow(['users']);
         expect(columnInfo.mock.calls.length).toBe(1);
         expect(results).toEqual([
             'users.id',
@@ -62,7 +62,7 @@ describe('grow', () => {
             artist_id: true,
             name: true
         }));
-        const results = await grow('artists', 'albums');
+        const results = await grow(['artists', 'albums']);
         expect(columnInfo.mock.calls.length).toBe(2);
         expect(results).toEqual([
             'artists.id',
@@ -83,7 +83,7 @@ describe('grow', () => {
             artist_id: true,
             name: true
         }));
-        const results = await grow('artists AS as', 'albums abms');
+        const results = await grow(['artists AS as', 'albums abms']);
         expect(columnInfo.mock.calls.length).toBe(2);
         expect(results).toEqual([
             'as.id',
@@ -99,7 +99,7 @@ describe('grow', () => {
             id: true,
             name: true
         }));
-        const results = await grow('users', 'users u');
+        const results = await grow(['users', 'users u']);
         expect(columnInfo.mock.calls.length).toBe(1);
         expect(results).toEqual([
             'users.id',
