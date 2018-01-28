@@ -35,12 +35,14 @@ const knex = Knex({
 
 const birch = birchtree(knex);
 
-const select = await birch.grow('artists', 'albums', 'songs AS albums:songs', 'authors AS albums:songs:author');
+const songs = 'albums:songs';
+const author = 'albums:songs:author';
+const select = await birch.grow('artists', 'albums', `songs AS ${songs}`, `authors AS ${author}`);
 const results = await birch('users')
     .select(select)
     .leftJoin('albums', 'albums.artist_id', 'artists.id')
-    .leftJoin('songs AS albums:songs', 'albums:songs.album_id', 'albums.id')
-    .leftJoin('authors as albums:songs:author', 'albums:songs:author.id', 'albums:songs.author_id')
+    .leftJoin(`songs AS ${songs}`, `${songs}.album_id`, `albums.id`)
+    .leftJoin(`authors as ${author}`, `${author}.id`, `${songs}.author_id`)
     .where('artists.id', '=', 1);
 const nestedResults = birch.nest(results);
 ```
@@ -103,9 +105,6 @@ There are some important things to note from the example.
 ### grow
 
 Asynchronous: Takes any number of table names with or without aliases as arguments and returns an array for knex's select function that will make sure columns don't get overwritten. It will select every column in each table given.
-
-```javascript
-// 
 
 ### nest
 
