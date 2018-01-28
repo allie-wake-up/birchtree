@@ -94,6 +94,46 @@ describe('grow', () => {
         ]);
     });
 
+    test('works with 4 tables', async () => {
+        columnInfo.mockReturnValueOnce(Promise.resolve({
+            id: true,
+            name: true
+        }));
+        columnInfo.mockReturnValueOnce(Promise.resolve({
+            id: true,
+            artist_id: true,
+            name: true
+        }));
+        columnInfo.mockReturnValueOnce(Promise.resolve({
+            id: true,
+            album_id: true,
+            author_id: true,
+            name: true
+        }));
+        columnInfo.mockReturnValueOnce(Promise.resolve({
+            id: true,
+            name: true
+        }));
+
+        const songs = 'albums:songs';
+        const author = 'albums:songs:author';
+        const results = await grow(['artists', 'albums', `songs AS ${songs}`, `authors AS ${author}`]);
+        expect(columnInfo.mock.calls.length).toBe(4);
+        expect(results).toEqual([
+            'artists.id',
+            'artists.name',
+            'albums.id AS albums:id',
+            'albums.artist_id AS albums:artist_id',
+            'albums.name AS albums:name',
+            `${songs}.id AS ${songs}:id`,
+            `${songs}.album_id AS ${songs}:album_id`,
+            `${songs}.author_id AS ${songs}:author_id`,
+            `${songs}.name AS ${songs}:name`,
+            `${author}.id AS ${author}:id`,
+            `${author}.name AS ${author}:name`,
+        ]);
+    });
+
     test('cache works', async () => {
         columnInfo.mockReturnValueOnce(Promise.resolve({
             id: true,
