@@ -111,3 +111,130 @@ Asynchronous: Takes any number of table names with or without aliases as argumen
 Takes the results from a select query and nests them using [treeize](https://github.com/kwhitley/treeize)
 
 ## Repository System
+
+### Basic Setup
+
+```typescript
+import { default as birchtree, BirchTree, Repo, Model } from 'birchtree';
+
+// let's just pretend we set knex up
+const birch = birchtree(knex);
+
+// let's make a user repo
+const userRepo = new UserRepo(birch);
+
+class User implements Model {
+    private id: number;
+    private email: string;
+    private username: string;
+    
+    constructor(props) {
+        Object.assign(this, props);
+    }
+    
+    toJSON() {
+        return {
+            id: this.id,
+            email: this.email,
+            username: this.username
+        }
+    }
+}
+
+class UserRepo extends Repo<User> {
+    constructor(birch) {
+        super(User, birch);
+    }
+    
+    async findDuplicate(user: User, trx: BirchTree.Transaction) {
+        return this.createQuery(trx)
+            .where({ email: user.email })
+            .orWhere({ username: user.username });
+    }
+}
+```
+
+### Create
+
+```typescript
+const user = new User({
+    email: 'fry@gmail.com',
+    username: 'fry'
+});
+await userRepo.create(user);
+```
+
+### Update
+
+```typescript
+user.username = 'bender';
+await userRepo.update(user);
+```
+
+### Save
+
+```typescript
+user.email = 'bender@gmail.com';
+await userRepo.save(user);
+
+const leela = new User({
+    email: 'leela@gmail.com',
+    username: 'leela'
+});
+await userRepo.save(leela);
+```
+
+### findOneById
+
+```typescript
+const bender = await userRepo.findOneById(user.id);
+```
+
+### findByIds
+
+```typescript
+const benderAndLeela = await userRepo.findByIds([bender.id, leela.id]);
+```
+
+### exterminate
+
+```typescript
+await userRepo.exterminate(bender);
+```
+
+### findOne
+
+```typescript
+const leelaAgain = await userRepo.findOne({ email: 'leela@gmail.com' });
+```
+
+### find
+
+```typescript
+const leelaAsAnArray = await userRepo.find({ email: 'leela@gmail.com' });
+```
+
+### createQuery
+
+This returns a birchtree/knex querybuilder.
+
+```typescript
+const results = await userRepo.createQuery().where('email', '=', 'bender@gmail.com');
+```
+
+### Transactions
+
+```typescript
+birch.transaction(trx => {
+    const bender = await userRepo.findOne({ username: 'bender' }, trx);
+    bender.username = 'coilette';
+    await userRepo.save(bender, trx);
+    
+    const leela = await userRepo.createQuery(trx).where({ username: 'leela' });
+    leela.username = 'Turanga';
+    await userRepo.save(leela, trx);
+    return [ bender, leela ];
+})
+.then(results => console.log(results))
+.catch(err => console.error(err));
+```
