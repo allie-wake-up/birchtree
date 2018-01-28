@@ -1,6 +1,6 @@
 {
   "name": "birchtree",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Repository system and helper functions for knexjs",
   "main": "build/index.js",
   "types": "build/index.d.ts",
