@@ -38,7 +38,7 @@ npm install --save birchtree
 
 BirchTree is written in typescript and should just work. You can import the type for birchtree like this
 
-```typescript
+```javascript
 import { BirchTree } from 'birchtree'
 ```
 
@@ -138,7 +138,7 @@ Takes the results from a select query and nests them using [treeize](https://git
 
 ### Basic Setup
 
-```typescript
+```javascript
 import { default as birchtree, BirchTree, Repo, Model } from 'birchtree';
 
 // let's just pretend we set knex up
@@ -180,7 +180,7 @@ class UserRepo extends Repo<User> {
 
 ### Create
 
-```typescript
+```javascript
 const user = new User({
     email: 'fry@gmail.com',
     username: 'fry'
@@ -190,14 +190,14 @@ await userRepo.create(user);
 
 ### Update
 
-```typescript
+```javascript
 user.username = 'bender';
 await userRepo.update(user);
 ```
 
 ### Save
 
-```typescript
+```javascript
 user.email = 'bender@gmail.com';
 await userRepo.save(user);
 
@@ -210,31 +210,31 @@ await userRepo.save(leela);
 
 ### findOneById
 
-```typescript
+```javascript
 const bender = await userRepo.findOneById(user.id);
 ```
 
 ### findByIds
 
-```typescript
+```javascript
 const benderAndLeela = await userRepo.findByIds([bender.id, leela.id]);
 ```
 
 ### exterminate
 
-```typescript
+```javascript
 await userRepo.exterminate(bender);
 ```
 
 ### findOne
 
-```typescript
+```javascript
 const leelaAgain = await userRepo.findOne({ email: 'leela@gmail.com' });
 ```
 
 ### find
 
-```typescript
+```javascript
 const leelaAsAnArray = await userRepo.find({ email: 'leela@gmail.com' });
 ```
 
@@ -242,13 +242,13 @@ const leelaAsAnArray = await userRepo.find({ email: 'leela@gmail.com' });
 
 This returns a birchtree/knex querybuilder.
 
-```typescript
+```javascript
 const results = await userRepo.createQuery().where('email', '=', 'bender@gmail.com');
 ```
 
 ### Transactions
 
-```typescript
+```javascript
 birch.transaction(trx => {
     const bender = await userRepo.findOne({ username: 'bender' }, trx);
     bender.username = 'coilette';
