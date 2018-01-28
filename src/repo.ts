@@ -1,16 +1,23 @@
 import * as Knex from 'knex';
 import { BirchTree } from './birchtree';
 
-export interface Model {
+export interface ModelConstructor {
+    new (): Model;
+}
+
+export class Model {
+    static tableName: string;
     id: number | string;
-    toJSON: () => any;
+    toJSON() {
+        return { id: this.id };
+    }
 }
 
 export default abstract class Repo<T extends Model> {
     protected birch: BirchTree;
     protected type: any;
 
-    constructor(type: any, birch: BirchTree) {
+    constructor(type: ModelConstructor, birch: BirchTree) {
         this.birch = birch;
         this.type = type;
     }
