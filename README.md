@@ -97,9 +97,9 @@ Results will look like
 
 There are some important things to note from the example.  
 
-- In order for things more than 1 layer deep to nest they must be aliased in a nested way. The delimiter is `:`.  
-- If a name or alias is plural than the results will form an array correctly.  
-- If the name or alias is singular than it will not form a collection.  
+- In order for things more than 1 layer deep to nest they must be aliased in a nested way. The delimiter is `:`
+- If a name or alias is plural than the results will form an array correctly
+- If the name or alias is singular than it will not form a collection
 - **You will only get 1 result if you use a singular alias for something you want multiple results for**
 
 ### grow
