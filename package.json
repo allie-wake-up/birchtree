@@ -1,7 +1,7 @@
 {
   "name": "birchtree",
   "version": "0.2.1",
-  "description": "Query helpers built on knex",
+  "description": "Repository system and helper functions for knexjs",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "files": [
@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TheKiteEatingTree/birch.git"
+    "url": "git+https://github.com/TheKiteEatingTree/birchtree.git"
   },
   "author": "Andrew Stephan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TheKiteEatingTree/birch/issues"
+    "url": "https://github.com/TheKiteEatingTree/birchtree/issues"
   },
-  "homepage": "https://github.com/TheKiteEatingTree/birch#readme",
+  "homepage": "https://github.com/TheKiteEatingTree/birchtree#readme",
   "devDependencies": {
     "@types/jest": "^22.1.0",
     "@types/knex": "^0.14.4",
