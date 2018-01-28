@@ -2,7 +2,7 @@
 
 BirchTree is mainly a helper library for [knexjs](http://knexjs.org/).  It takes an instance of knex and adds two helper functions: grow and nest.  These functions make it easy to get nested objects as results when running join queries.
 
-BirchTree is also a repository library built on knexjs.  It provides a base `Repo` class and `Model` interface that can be extended and implemented to create a basic model system.
+BirchTree is also a repository library built on knexjs.  It provides base `Repo` and `Model` classes that can be extended to create a basic model system.
 
 <!-- toc -->
 
@@ -147,12 +147,15 @@ const birch = birchtree(knex);
 // let's make a user repo
 const userRepo = new UserRepo(birch);
 
-class User implements Model {
+class User extends Model {
+    static tableName = 'users';
+
     private id: number;
     private email: string;
     private username: string;
 
     constructor(props) {
+        super();
         Object.assign(this, props);
     }
 
