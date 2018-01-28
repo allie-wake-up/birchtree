@@ -1,14 +1,16 @@
 {
-  "name": "birch",
-  "version": "0.1.0",
+  "name": "birchtree",
+  "version": "0.0.1",
   "description": "Query helpers built on knex",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "files": ["build"],
   "scripts": {
     "test": "jest",
     "test-coverage": "jest --coverage",
     "test-watch": "jest --watch",
     "build": "tsc --project tsconfig.json",
+    "prepublishOnly": "npm run build",
     "watch": "tsc --project tsconfig.json --watch"
   },
   "repository": {
