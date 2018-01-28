@@ -1,10 +1,12 @@
 {
   "name": "birchtree",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Query helpers built on knex",
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "scripts": {
     "test": "jest",
     "test-coverage": "jest --coverage",
