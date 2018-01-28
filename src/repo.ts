@@ -25,7 +25,12 @@ export default abstract class Repo<T extends Model> {
         return this.createQuery(trx).where('id', model.id).del();
     }
 
-    async findOneByAttributes(attrs: any, trx: Knex.Transaction): Promise<T> {
+    async find(attrs: any, trx: Knex.Transaction): Promise<T> {
+        const rows = await this.createQuery(trx).where(attrs);
+        return rows.map(row => new this.type(row));
+    }
+
+    async findOne(attrs: any, trx: Knex.Transaction): Promise<T> {
         const rows = await this.createQuery(trx).where(attrs);
         if (!rows[0]) {
             return null;
@@ -59,7 +64,7 @@ export default abstract class Repo<T extends Model> {
         return model;
     }
 
-    protected createQuery(trx: Knex.Transaction) {
+    createQuery(trx: Knex.Transaction) {
         const query = this.birch(this.type.tableName);
         if (trx) {
             query.transacting(trx);
