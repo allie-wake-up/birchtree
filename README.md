@@ -4,6 +4,30 @@ BirchTree is mainly a helper library for [knexjs](http://knexjs.org/).  It takes
 
 BirchTree is also a repository library built on knexjs.  It provides a base `Repo` class and `Model` interface that can be extended and implemented to create a basic model system.
 
+<!-- toc -->
+
+- [Install](#install)
+- [TypeScript](#typescript)
+- [Helper Functions](#helper-functions)
+  * [Basic Usage](#basic-usage)
+  * [Important](#important)
+  * [grow](#grow)
+  * [nest](#nest)
+- [Repository System](#repository-system)
+  * [Basic Setup](#basic-setup)
+  * [Create](#create)
+  * [Update](#update)
+  * [Save](#save)
+  * [findOneById](#findonebyid)
+  * [findByIds](#findbyids)
+  * [exterminate](#exterminate)
+  * [findOne](#findone)
+  * [find](#find)
+  * [createQuery](#createquery)
+  * [Transactions](#transactions)
+
+<!-- tocstop -->
+
 ## Install
 
 ```bash
@@ -95,7 +119,7 @@ Results will look like
 
 ### Important
 
-There are some important things to note from the example.  
+There are some important things to note from the example.
 
 - In order for things more than 1 layer deep to nest they must be aliased in a nested way. The delimiter is `:`
 - If a name or alias is plural than the results will form an array correctly
@@ -127,11 +151,11 @@ class User implements Model {
     private id: number;
     private email: string;
     private username: string;
-    
+
     constructor(props) {
         Object.assign(this, props);
     }
-    
+
     toJSON() {
         return {
             id: this.id,
@@ -145,7 +169,7 @@ class UserRepo extends Repo<User> {
     constructor(birch) {
         super(User, birch);
     }
-    
+
     async findDuplicate(user: User, trx: BirchTree.Transaction) {
         return this.createQuery(trx)
             .where({ email: user.email })
@@ -229,7 +253,7 @@ birch.transaction(trx => {
     const bender = await userRepo.findOne({ username: 'bender' }, trx);
     bender.username = 'coilette';
     await userRepo.save(bender, trx);
-    
+
     const leela = await userRepo.createQuery(trx).where({ username: 'leela' });
     leela.username = 'Turanga';
     await userRepo.save(leela, trx);
