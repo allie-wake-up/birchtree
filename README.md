@@ -185,12 +185,12 @@ class UserRepo extends Repo<User> {
 ### Important
 
 - Models
-    - The models must have static tableName property equal to the name of the corresponding database table
-    - models must have a toJSON function.  This function is used to get the object to persist in repo.create, repo.update and repo.save
-    - models must have an id property
+    - The models must have `static tableName` property equal to the name of the corresponding database table
+    - models must have a `toJSON` function.  This function is used to get the object to persist in `repo.create`, `repo.update` and `repo.save`
+    - models must have an `id` property
 - Repos
-    - Must pass the model class and birch to super in the constructor
-    - can access birch with this.birch in extended repos
+    - Must pass the model class and birch to `super` in the constructor
+    - can access birch with `this.birch` in extended repos
 
 ### Create
 
