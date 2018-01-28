@@ -1,6 +1,6 @@
-import Repo from './repo';
-import birchtree from './birchtree';
+import { default as Repo, Model } from './repo';
+import { default as birchtree, BirchTree } from './birchtree';
 
 export default birchtree;
 
-export { Repo };
+export { BirchTree, Model, Repo };

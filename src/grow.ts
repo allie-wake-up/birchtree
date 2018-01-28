@@ -1,4 +1,4 @@
-export default async function grow(...tables: string[]): Promise<string[]> {
+export default async function grow(tables: string[]): Promise<string[]> {
     let results = [];
 
     let first = true;
