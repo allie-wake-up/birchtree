@@ -12,7 +12,7 @@
     "test-coverage": "jest --coverage",
     "test-watch": "jest --watch",
     "toc": "markdown-toc -i README.md",
-    "build": "rm -r build && tsc --project tsconfig.json",
+    "build": "rm -rf build && tsc --project tsconfig.json",
     "prepublishOnly": "npm run toc && npm run build",
     "watch": "tsc --project tsconfig.json --watch"
   },

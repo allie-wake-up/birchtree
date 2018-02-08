@@ -60,3 +60,5 @@ typings/
 .env
 
 .zedstate
+*.swp
+Session.vim

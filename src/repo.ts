@@ -2,7 +2,7 @@ import * as Knex from 'knex';
 import { BirchTree } from './birchtree';
 
 export interface ModelConstructor {
-    new (): Model;
+    new (props: any): Model;
 }
 
 export class Model {
