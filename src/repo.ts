@@ -1,4 +1,3 @@
-import * as Knex from 'knex';
 import { BirchTree } from './birchtree';
 
 export interface ModelConstructor {
@@ -22,22 +21,22 @@ export default abstract class Repo<T extends Model> {
         this.type = type;
     }
 
-    async create(model: T, trx: Knex.Transaction): Promise<T> {
+    async create(model: T, trx: BirchTree.Transaction): Promise<T> {
         const ids = await this.createQuery(trx).insert(model.toJSON());
         model.id = ids[0];
         return model;
     }
 
-    async exterminate(model: T, trx: Knex.Transaction): Promise<number> {
+    async exterminate(model: T, trx: BirchTree.Transaction): Promise<number> {
         return this.createQuery(trx).where('id', model.id).del();
     }
 
-    async find(attrs: any, trx: Knex.Transaction): Promise<T> {
+    async find(attrs: any, trx: BirchTree.Transaction): Promise<T> {
         const rows = await this.createQuery(trx).where(attrs);
         return rows.map(row => new this.type(row));
     }
 
-    async findOne(attrs: any, trx: Knex.Transaction): Promise<T> {
+    async findOne(attrs: any, trx: BirchTree.Transaction): Promise<T> {
         const rows = await this.createQuery(trx).where(attrs);
         if (!rows[0]) {
             return null;
@@ -45,7 +44,7 @@ export default abstract class Repo<T extends Model> {
         return new this.type(rows[0]);
     }
 
-    async findOneById(id: number, trx: Knex.Transaction): Promise<T> {
+    async findOneById(id: number, trx: BirchTree.Transaction): Promise<T> {
         const rows = await this.createQuery(trx).where('id', id);
         if (!rows[0]) {
             return null;
@@ -53,12 +52,12 @@ export default abstract class Repo<T extends Model> {
         return new this.type(rows[0]);
     }
 
-    async findByIds(ids: number[], trx: Knex.Transaction): Promise<T[]> {
+    async findByIds(ids: number[], trx: BirchTree.Transaction): Promise<T[]> {
         const rows = await this.createQuery(trx).whereIn('id', ids);
         return rows.map(row => new this.type(row));
     }
 
-    async save(model: T, trx: Knex.Transaction): Promise<T> {
+    async save(model: T, trx: BirchTree.Transaction): Promise<T> {
         if (model.id) {
             return this.update(model, trx);
         } else {
@@ -66,12 +65,12 @@ export default abstract class Repo<T extends Model> {
         }
     }
 
-    async update(model: T, trx: Knex.Transaction): Promise<T> {
+    async update(model: T, trx: BirchTree.Transaction): Promise<T> {
         await this.createQuery(trx).update(model.toJSON());
         return model;
     }
 
-    createQuery(trx: Knex.Transaction) {
+    createQuery(trx: BirchTree.Transaction): BirchTree.QueryBuilder {
         const query = this.birch(this.type.tableName);
         if (trx) {
             query.transacting(trx);

@@ -7,6 +7,13 @@ export interface BirchTree extends Knex {
     nest: typeof nestFn;
 }
 
+export namespace BirchTree {
+    export import KnexTypes = Knex;
+    export import QueryBuilder = Knex.QueryBuilder;
+    export import QueryInterface = Knex.QueryInterface;
+    export import Transaction = Knex.Transaction;
+}
+
 export default function birchtree(knex: Knex, cache: Map<string, string[]> = new Map()): BirchTree {
     this.knex = knex;
     this.cache = cache;
