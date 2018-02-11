@@ -1,5 +1,7 @@
 # BirchTree [![Build Status](https://travis-ci.org/TheKiteEatingTree/birchtree.svg?branch=master)](https://travis-ci.org/TheKiteEatingTree/birchtree)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/TheKiteEatingTree/birchtree.svg)](https://greenkeeper.io/)
+
 BirchTree is mainly a helper library for [knexjs](http://knexjs.org/).  It takes an instance of knex and adds two helper functions: grow and nest.  These functions make it easy to get nested objects as results when running join queries.
 
 BirchTree is also a repository library built on knexjs.  It provides base `Repo` and `Model` classes that can be extended to create a basic model system.
