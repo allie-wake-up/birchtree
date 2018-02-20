@@ -4,7 +4,7 @@
         "useSoftTabs": true,
         "tabSize": 4,
         "trimWhitespaceOnSave": true,
-        "gotoExclude": ["*/build/*", "*/node_modules/*"],
+        "gotoExclude": ["**/build/*", "**/node_modules*"],
         "saveTimeout": 0
     },
     "packages": [],
