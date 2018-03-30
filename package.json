@@ -31,7 +31,7 @@
     "jest": "22.4.2",
     "markdown-toc": "1.2.0",
     "ts-jest": "22.4.2",
-    "typescript": "2.7.1"
+    "typescript": "2.8.1"
   },
   "dependencies": {
     "@types/knex": "^0.14.4",
