@@ -28,7 +28,7 @@
   "homepage": "https://github.com/TheKiteEatingTree/birchtree#readme",
   "devDependencies": {
     "@types/jest": "22.2.3",
-    "jest": "22.4.3",
+    "jest": "22.4.4",
     "markdown-toc": "1.2.0",
     "ts-jest": "22.4.6",
     "typescript": "2.8.1"
